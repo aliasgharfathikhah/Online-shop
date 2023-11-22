@@ -42,3 +42,9 @@
     </div>
 </section>
 {% endblock %}
+
+{% block categorys %}
+    {% for category in categorys %}
+        <li><a class="dropdown-item" href="#">{{ category.name }}</a></li>
+    {% endfor %}
+{% endblock %}
