@@ -1,0 +1,98 @@
+<head>
+    {% load static %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'core/stylelogin.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'core/styles.css' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} | FATHI</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+</head>
+
+<body>
+    
+    <section class="h-100 gradient-form" style="background-color: #eee;">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+              <div class="card rounded-3 text-black">
+                <div class="row g-0">
+                  <div class="col-lg-6">
+                    <div class="card-body p-md-5 mx-md-4">
+      
+                      <div class="text-center">
+                        <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp" -->
+                          <!-- style="width: 185px;" alt="logo"> -->
+                        <h4 class="mt-1 mb-5 pb-1" dir="rtl">به <span style="color: red;">نیو</span>کالا خوش اومدی!</h4>
+                      </div>
+      
+                      <form action="." method="post" dir="rtl">
+                        <p>به حساب خود وارد شوید</p>
+                        
+                        {% csrf_token %}
+                        <div class="form-outline mb-4">
+                          <label class="form-label" for="{{ form.username.id_for_label }}">نام کاربری</label>
+                          {{ form.username }}
+                        </div>
+                        
+                        <script>
+                          document.getElementById('{{ form.username.id_for_label }}').classList.add('form-control');
+                          document.getElementById('{{ form.username.id_for_label }}').placeholder = 'نام کاربری شما';
+                        </script>
+ 
+                      <div class="form-outline mb-4">
+                        <label class="form-label" for="{{ form.password.id_for_label }}">رمز عبور</label>
+                        {{ form.password }}
+                      </div>
+                      
+                      <script>
+                          document.getElementById('{{ form.password.id_for_label }}').classList.add('form-control');
+                          document.getElementById('{{ form.password.id_for_label }}').placeholder = 'رمز عبور شما';
+                      </script>
+                    
+                        {% if form.errors or form.non_field_errors %}
+                            <div class="mb-3 p-6 bg-red-100 rounded-xl">
+                                {% for field in form %}
+                                    {% for error in field.errors %}
+                                        {{ error }}
+                                    {% endfor %}
+                                {% endfor %}
+                                {{ form.non_field_errors }}
+                            </div>
+                        {% endif %}
+                        <button  class="btn btn-outline-danger" >ورود</button>
+                        <div class="d-flex align-items-center justify-content-center pb-4">
+                          <p class="mb-0 me-2">حسابی ندارید؟</p>
+                          <a href="{% url 'core:signup' %}"><button type="button" class="btn btn-outline-danger" >یک حساب جدید بسازید!</button></a>
+                        </div>
+      
+                      </form>
+      
+                    </div>
+                  </div>
+                  <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+                    <div class="text-white px-3 py-4 p-md-5 mx-md-4" dir="rtl">
+                      <h4 class="mb-4">چرا؟ نیوکالا</h4>
+                      <p class="small mb-0" dir="rtl">نیوکالا یک بازاری از کالا های 
+                        بروز و جدید است و با شما بزور تر میشود
+                        به راحتی کالا های رو که میخوای پیدا کن و کالایی رو که میخوای بفروشی بفروش
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+</body>
+

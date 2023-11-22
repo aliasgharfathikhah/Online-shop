@@ -1,0 +1,134 @@
+{% extends 'core/base2.html' %}
+
+{% block title %}{{ item.name }}{% endblock %}
+
+
+
+
+{% block content %}
+
+<section class="py-1">
+    <div class="container px-5 px-lg-1 mt-10">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3 justify-content-center">
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <!-- Product image-->
+                    <img class="card-img-top" src="{{ item.image.url }}" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-1">
+                        <div class="text-right" dir="rtl" style="text-align: right;">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">{{ item.name }}</h5>
+                            <!-- Product reviews-->
+                            <p class="fw-bolder">فروشنده : {{ item.created_by.username }}</p>
+                            <p class="fw">{{ item.description }}</p>
+                            <!-- Product price-->
+                            <!-- <span class="text-muted text-decoration-line-through">$20.00</span> -->
+                            {{ item.price }}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    {% if request.user.username == created_by.username %}
+                        <style>
+                            #notification {
+                                display: none;
+                                text-align: center;
+                                background-color: #f1eeee;
+                                color: rgb(123, 2, 2);
+                                padding: 16px;
+                                position: fixed;
+                                z-index: 1;
+                                left: 50%;
+                                top: 50%;
+                                transform: translate(-50%, -50%);
+                                max-width: 80%;
+                                border-radius: 10px;
+                            }
+                            #notification button {
+                                color: rgb(240, 238, 238);
+                                border: none;
+                                cursor: pointer;
+                                opacity: 0.9;
+                                margin-top: 10px;
+                                padding: 10px;
+                                border-radius: 20%;
+                                background-color: rgb(255, 0, 0);
+                            }
+                            #notification2{
+                                color: rgb(240, 238, 238);
+                                border: none;
+                                cursor: pointer;
+                                opacity: 0.9;
+                                margin-top: 10px;
+                                padding: 10px;
+                                border-radius: 20%;
+                                background-color: rgb(0, 255, 140);
+                            }
+                        </style>
+                    
+                        <div id="notification">
+                        <p>آیا میخواهید کالای {{ item.name }} را حذف کنید؟؟</p>
+                        <a href="{% url 'item:delete' item.id %}"><button onclick="closeNotification()">بله</button></a>
+                        <a href=""><button onclick="closeNotification()">خیر</button></a>
+                        </div>
+
+                    
+                            <script>
+                                function closeNotification() {
+                                document.getElementById("notification").style.display = "none";
+                                }
+
+                                function showNotification() {
+                                document.getElementById("notification").style.display = "block";
+                                }
+                            </script>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-left"><a class="btn btn-outline-dark mt-auto" href="#" onclick="showNotification()">حذف</a></div>
+                            </div>
+                            <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                                <div class="text-left"><a class="btn btn-outline-dark mt-auto" href="{% url 'item:edit' item.id %}">ویرایش</a></div>
+                            </div>
+                    {% else %}
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-left"><a class="btn btn-outline-dark mt-auto" href="#">خرید</a></div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+         </div>
+    </div>
+</section>
+<hr>
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for item in related_item %}
+            <div class="col mb-5">
+                <div class="card h-100">
+                    
+                    <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
+                    <a href="{% url 'item:detail' item.id %}">
+                    <img class="card-img-top" src="{{ item.image.url }}" alt="..." />
+                    </a>
+                    <div class="card-body p-4">
+                        <div class="text-center">
+
+                            <h5 class="fw-bolder">{{ item.name}}</h5>
+
+                            <!-- <span class="text-muted text-decoration-line-through">$20.00</span> -->
+                            {{ item.price }}
+                        </div>
+                    </div>
+
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'item:detail' item.id %}">مشاهده</a></div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+{% endblock %}
