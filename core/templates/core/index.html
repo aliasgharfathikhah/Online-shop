@@ -4,7 +4,7 @@
 <header class="bg-dark py-2">
     <div class="container px-2 px-lg-4 my-3">
         <div class="text-center text-white">
-            <h1 class="display-3 fw-bolder"><span style="color: red;">نیو</span>کالا</h1>
+            <a href="/" style="text-decoration: none;"><h1 class="display-3 fw-bolder"><span style="color: red;">نیو</span>کالا</h1></a>
         </div>
     </div>
 </header>
@@ -45,6 +45,6 @@
 
 {% block categorys %}
     {% for category in categorys %}
-        <li><a class="dropdown-item" href="#">{{ category.name }}</a></li>
+        <li><a class="dropdown-item" href="category_search/{{ category.name }}">{{ category.name }}</a></li>
     {% endfor %}
 {% endblock %}
