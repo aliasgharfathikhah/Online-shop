@@ -11,6 +11,16 @@ def index(request):
         'categorys': category,
     })
 
+def category_search(request, categorys):
+    category = Category.objects.get(name=categorys)
+    items = Item.objects.filter(is_sold=False, category=category)
+
+    return render(request, 'core/index.html', {
+        'items': items,
+        'categorys': Category.objects.all(),
+    })
+
+
 def signup(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
