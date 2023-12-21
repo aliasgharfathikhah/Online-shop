@@ -2,4 +2,4 @@
 
 Instructions in [English](./README-EN.md)<br>
 
-دستورالعمل به زبان [فارسی](./README-fa.md)
+دستورالعمل به زبان [فارسی](./README-FA.md)
